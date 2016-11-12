@@ -1,3 +1,4 @@
+##นายเอกชัย  ภมรสุขนิรันดิ์ 57030253
 #ใบงานที่ 8
 ##การเปลี่ยนทิศทางการทำงานของโปรแกรม
 
@@ -50,6 +51,38 @@ Line 5
 Line 2
 Line 9
 ```
+## แก้ไขดัดแปลงโปรแกรม โดยใช้คำสั่ง goto จะได้ดังนี้
+```
+using System;
+namespace lab8
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Line 1");
+            goto line4;
+            line2:
+            Console.WriteLine("Line 2");
+            goto line9;
+            Console.WriteLine("Line 3");
+            line4:
+            Console.WriteLine("Line 4");
+            Console.WriteLine("Line 5");
+            goto line2;
+            Console.WriteLine("Line 6");
+            Console.WriteLine("Line 7");
+            Console.WriteLine("Line 8");
+            line9:
+            Console.WriteLine("Line 9");
+            //Console.WriteLine("Line 10");
+        }
+    }
+}
+```
+![](https://github.com/Ekachai253/LAB-08/blob/ec4f127f3dc86a12151245ac1d2def615c656bd1/1.jpg)
+
+
 ###1.1.2. try…catch…finally
 ประโยค ```try…catch…finally``` ใช้สำหรับการดักจับและจัดการข้อผิดพลาดของโปรแกรม ทั้งขณะทำงาน (Run Time Process) หรือในขณะเริ่มต้นทำงาน (Init Process) โดยเราจะวางคำสั่งที่คาดการว่าจะเกิดข้อผิดพลาดขึ้นไว้ในบล็อกของ ```Try``` และวางส่วนจัดการข้อผิดพลาดไว้ในบล็อกของ ```catch``` และถ้ามีการดำเนินการใดๆ ที่ต้องทำทั้งในกรณีที่มีและไม่มีข้อผิดพลาด ก็จะใส่ไว้ในบล็อกของ ```Finally``` ในคำสั่งนี้สามารถเขียนบล็อกของ ```catch``` ได้หลายบล็อก คำสั่งนี้มีประโยชน์มากในการทำงานกับระบบอินเตอร์เน็ต โดยเฉพาะในกรณีที่การเชื่อมต่อไม่เสถียร เพราะจะช่วยป้องกันการค้างของโปรแกรมของเราขณะเรียกข้อมูลจาก network ได้
 **ตัวอย่าง** โปรแกรมที่ไม่ได้ใช้คำสั่ง ```try…catch…finally```
@@ -143,6 +176,7 @@ public class TryCatch
      }
  }
 ```
+##program ไม่มีข้อผิดพลาด
 ###2.
 ``` csharp
 using System;
@@ -157,6 +191,38 @@ public class TryCatch
      }
  }
 ```
+##program มีข้อผิดพลาด เเก้เป็น
+
+```
+using System;
+namespace lab8
+{
+    class program
+    {
+        static void Main(string[] args)
+        {          
+            try
+            {
+                int a = 0;
+                int b = 10;
+                b /= a;
+                Console.WriteLine(a);
+
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+    }
+}
+```
+![](https://github.com/Ekachai253/LAB-08/blob/master/2.jpg)
+
 ###3.
 ``` csharp
 using System;
@@ -173,6 +239,37 @@ public class TryCatch
      }
  }
 ```
+##program มีข้อผิดพลาด เเก้เป็น
+
+
+```
+using System;
+namespace lab8
+{
+    class program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                int value = 800000000;
+                checked // check for overflow
+                {
+                    int square = value * value;
+                    Console.WriteLine("{0} ^ 2 = {1}", value, square);
+                }
+
+            }
+            catch (OverflowException e)
+            {
+                Console.WriteLine(e.Message);
+            }           
+        }
+    }
+ }
+ ```
+ ![](https://github.com/Ekachai253/LAB-08/blob/master/3.jpg)
+
 ###1.1.3. คำสั่ง ```throw```
 
 คำสั่ง ```throw``` ใช้เพื่อเปลี่ยนเส้นทางการทำงานของโปรแกรมโดยเจาะจง exception เป้าหมาย
@@ -204,6 +301,7 @@ public class ExceptionLearning
 3.	FileNotFoundException
 4.	FormatException
 ```
+
 ```csharp
 using System;
 using System.IO;
@@ -242,6 +340,16 @@ public class ExceptionLearning
     }
  }
 ````
+
+##จากที่ได้ลองเปลี่ยนชนิด throw exception ดูเเล้ว ผลที่ออกมานั้นจะเเสดงการเเจ้งเตือนเเตกต่างกัน 
+#DivideByZeroException เป็นการเเจ้งเตือนโปรเเกรมที่ ยกเว้นการหารด้วยศูนย์ ดังรูป
+![](https://github.com/Ekachai253/LAB-08/blob/ba0ff0ac4bd1876d5223ed274fd009ae9fe42458/44.jpg)
+#NullReferenceException เป็นการเเจ้งเตือนโปรเเกรมที่ ยกเว้นการอ้างอิงถึงที่ว่าง ดังรูป
+![](https://github.com/Ekachai253/LAB-08/blob/ba0ff0ac4bd1876d5223ed274fd009ae9fe42458/55.jpg)
+#FileNotFoundException   เป็นการเเจ้งเตือนโปรเเกรมที่ ยกเว้นไม่สามารถหาไฟล์ที่ระบุได้ ดังรูป
+![](https://github.com/Ekachai253/LAB-08/blob/ba0ff0ac4bd1876d5223ed274fd009ae9fe42458/66.jpg)
+#FormatException  เป็นการเเจ้งเตือนโปรเเกรมที่ ยกเว้นหนึ่งในรายการที่ระบุอยู่ในรูปแบบที่ไม่ถูกต้อง ดังรูป
+![](https://github.com/Ekachai253/LAB-08/blob/ba0ff0ac4bd1876d5223ed274fd009ae9fe42458/77.jpg)
 
 ###เรื่องของ exception นี้ศึกษาเพิ่มเติมได้ [ที่นี่](http://msdn.microsoft.com/en-us/library/vstudio/2w8f0bss%28v=vs.100%29.aspx)
 
@@ -306,7 +414,39 @@ execute next line
 1.	ถ้าค่าที่ผู้ใช้ป้อน มากกว่า ค่าที่สุ่มมาได้ ให้พิมพ์ ```“Too Hight, You loss!!”``` ออกทางหน้าจอ
 2.	ถ้าค่าที่ผู้ใช้ป้อน น้อยกว่า ค่าที่สุ่มมาได้ ให้พิมพ์ ```“Too Low, You loss!!”```ออกทางหน้าจอ
 3.	ถ้าค่าที่ผู้ใช้ป้อน เท่ากับ ค่าที่สุ่มมาได้ ให้พิมพ์ ```“Okay, You win!!”``` ออกทางหน้าจอ
+```
+using System;
 
+namespace Lab8
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            int randomnumber = random.Next(0,50);
+            Console.WriteLine("Random Number : " + randomnumber);
+            int a = randomnumber;
+            Console.Write("Enter number : ");
+            int b = Convert.ToInt32(Console.ReadLine());
+            if (a > b)
+            {
+                Console.WriteLine("Too Hight, You loss!!");
+            }
+            if (a < b)
+            {
+                Console.WriteLine("Too Low, You loss!!");
+            }
+            if (a == b)
+            {
+                Console.WriteLine("Okay, You win");
+            }
+
+        }
+    }
+}
+```
+![](https://github.com/Ekachai253/LAB-08/blob/master/RB.jpg)
 ###1.2.2.	คำสั่ง ```if…else```
 
 เงื่อนไขที่เป็นไปได้ของคำสั่งในการตัดสินใจมีสองทางเสมอ (true และ false) ที่ผ่านมา เราจะเห็นว่า คำสั่ง if เป็นคำสั่งที่เลือกทำเพียงทางเดียว (เฉพาะในกรณีที่เงื่อนไขเป็น true เท่านั้น) หากต้องการให้โปรแกรมทำงานทั้งกรณีที่เงื่อนไขเป็น true และ false เราต้องใช้คำสั่ง if…else โดยมีรูปแบบดังนี้
@@ -352,8 +492,38 @@ this line is always execute
 **การทดลอง**
 
 ให้เขียนโปรแกรมสุ่มตัวเลข (จากใบงานที่ 7) แล้วใช้คำสั่ง ```if…else``` โดยมีเงื่อนไขต่อไปนี้
-
 1. ถ้าค่าที่ผู้ใช้ป้อน เท่ากับ ค่าที่สุ่มมาได้ ให้พิมพ์ ```“Hooray, You win!!”``` ออกทางหน้าจอ มิฉะนั้นให้พิมพ์คำว่า ```“Sorry, You loss!!”```
+```
+using System;
+
+namespace Lab8
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            int randomnumber = random.Next(0,50);
+            Console.WriteLine("Random Number : " + randomnumber);
+            int a = randomnumber;
+            Console.Write("Enter number : ");
+            int b = Convert.ToInt32(Console.ReadLine());
+            if (a == b)
+            {
+                Console.WriteLine("Hooray, You win!!");
+            }
+            else
+            {
+                Console.WriteLine("Sorry, You loss!!");
+            }
+
+        }
+    }
+}
+```
+![](https://github.com/Ekachai253/LAB-08/blob/49f1e04825f14216a490f386e9eadb247d749d3e/yes.jpg)
+![](https://github.com/Ekachai253/LAB-08/blob/49f1e04825f14216a490f386e9eadb247d749d3e/no.jpg)
+
 
 ###1.2.3.	คำสั่ง ```if``` ซ้อนกัน (nested if)
 คำสั่ง ```if``` สามารถเขียนซ้อนกันเป็นชั้นได้ เรียกว่า nested if มีรูปแบบดังนี้
@@ -446,6 +616,44 @@ Grade C
 0-49|	F
 
 3. รูปแบบการพิมพ์คือ score: [sss] grade: [gg] เมื่อ sss คือคะแนน และ gg คือ เกรดที่ได้
+```
+using System;
+
+namespace Lab8
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            int randomnumber = random.Next(0,100);
+            Console.WriteLine(" SCORE : " + randomnumber);
+            int a = randomnumber;
+            //Console.Write("Enter number : ");
+            //int b = Convert.ToInt32(Console.ReadLine());
+
+            if (a < 49)
+                Console.WriteLine(" Grade : F");
+            else if (a < 54)
+                Console.WriteLine(" Grade : D");
+            else if (a < 59)
+                Console.WriteLine(" Grade : D+");
+            else if (a < 64)
+                Console.WriteLine(" Grade : C");
+            else if (a < 69)
+                Console.WriteLine(" Grade : C+");
+            else if (a < 74)
+                Console.WriteLine(" Grade : B");
+            else if (a < 79)
+                Console.WriteLine(" Grade : B+");
+            else
+                Console.WriteLine(" Grade : A");
+        }
+    }
+}
+```
+![](https://github.com/Ekachai253/LAB-08/blob/master/geade.jpg)
+
 
 ###1.2.5. คำสั่ง ```switch```
 
@@ -524,6 +732,48 @@ fri|	Friday	|Blue
 sat|	Saturday	|Purple
 อื่นๆ|	 ---|	---
 
+
+```
+using System;
+using System.IO;
+public class switchLearning
+{
+    public static void Main()
+    {
+        Console.Write("Input day name (sun,mon,tue,wed,thu or fri) : ");
+        string gradeString = Console.ReadLine();
+        string message;
+        switch (gradeString.ToUpper())
+        {
+            case "SUN":
+                message = "sun is Sunday color Red";
+                break;
+            case "MON":
+                message = "mon is monday, color Yellow";
+                break;
+            case "TUE":
+                message = "tue is tuesday, color Pink";
+                break;
+            case "WED":
+                message = "wed is wednesday, color Green";
+                break;
+            case "THU":
+                message = "thu is thursday, color Orange";
+                break;
+            case "FRI":
+                message = "fri is friday, color Blue";
+                break;
+
+             default:
+               message = "--- , ---";
+                break;
+        }
+        Console.WriteLine(message);
+    }
+}
+```
+![](https://github.com/Ekachai253/LAB-08/blob/4ea72e77004721f54f1fdfbc3d1166c380c420c1/sun.jpg)
+![](https://github.com/Ekachai253/LAB-08/blob/4ea72e77004721f54f1fdfbc3d1166c380c420c1/uuuuu.jpg)
 
 ##Reference
 เนื้อหาในส่วนนี้เป็นอ้างอิงสำหรับการเขียนโปรแกรม
